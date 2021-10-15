@@ -14,6 +14,13 @@ impl Test {
   }
 }
 
+#[derive(Debug)]
+enum Ways {
+  Left,
+  Right,
+  Mid
+}
+
 fn borrow(str: &mut String) {
   // 可变引用，中途可以修改引用的值
   println!("{}", str);
@@ -45,6 +52,12 @@ fn struct_test() {
   Test::test();
 }
 
+fn enum_test() -> () {
+  let a = Ways::Left;
+  println!("{:?}", a);
+}
+
 fn main() {
   struct_test();
+  enum_test();
 }
