@@ -16,9 +16,16 @@ impl Test {
 
 #[derive(Debug)]
 enum Ways {
-  Left,
-  Right,
+  Left { dx: i16, dy: i16 },
+  Right(Test),
   Mid
+}
+
+impl Ways {
+  fn call(&self) -> &str {
+    println!("Ways call");
+    "some"
+  }
 }
 
 fn borrow(str: &mut String) {
@@ -52,12 +59,70 @@ fn struct_test() {
   Test::test();
 }
 
+fn match_test(x: Ways) -> String {
+  match x {
+    Ways::Mid => String::from("mid"),
+    Ways::Left { dx, dy } => {
+      println!("{}, {}", dx, dy);
+      String::from("dx, dy")
+    },
+    Ways::Right(test) => {
+      println!("{:?}", test);
+      String::from(test.user)
+    }
+  }
+}
+
+fn match_test2(x: u8) {
+  match x {
+    0 => println!("0"),
+    _ => println!("这不就是默认情况么？default？")
+  }
+}
+
+fn match_test3(x: u8) {
+  if let 0 = x {
+    println!("这里就是匹配一种模式")
+  } else {
+    println!("else就等同于_匹配")
+  }
+}
+
+fn option_test(x: Option<i8>) -> Option<i8> {
+  if let Some(i) = x {
+    Some(i + 1)
+  } else {
+    None
+  }
+}
+
 fn enum_test() -> () {
-  let a = Ways::Left;
+  let a = Ways::Mid;
   println!("{:?}", a);
+  println!("{}", a.call());
+  // 匿名结构关联
+  let b = Ways::Left { dx: 123, dy: 456 };
+  println!("{:?}", b);
+  // 函数关联？
+  let c = Ways::Right(Test {
+    user: String::from("sfdff"),
+    age: 123,
+    name: None,
+  });
+  println!("{:?}", c);
+  println!("-----分割线-----");
+  match_test(a);
+  match_test(b);
+  match_test(c);
+  match_test2(0);
+  match_test2(12);
+  match_test3(0);
+  match_test3(12);
 }
 
 fn main() {
   struct_test();
   enum_test();
+  println!("{:?}", option_test(None));
+  println!("{:?}", option_test(Some(8)));
 }
