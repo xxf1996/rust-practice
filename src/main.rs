@@ -1,3 +1,7 @@
+mod mod_test; // 使用整个模块
+
+use crate::mod_test2;
+
 #[derive(Debug)]
 struct Test {
   user: String,
@@ -125,4 +129,6 @@ fn main() {
   enum_test();
   println!("{:?}", option_test(None));
   println!("{:?}", option_test(Some(8)));
+  mod_test::you_say("he he");
+  mod_test2::just_see()
 }
