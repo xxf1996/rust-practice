@@ -1,6 +1,12 @@
-mod mod_test; // 使用整个模块
+mod mod_test; // 声明模块（相当于引入？好像不加这个就无法直接通过use来使用）
+mod vector_test;
+pub use crate::mod_test::inner_mod;
 
-use crate::mod_test2;
+mod mod_test2 {
+  pub fn just_see() -> u8 {
+    234
+  }
+}
 
 #[derive(Debug)]
 struct Test {
@@ -130,5 +136,7 @@ fn main() {
   println!("{:?}", option_test(None));
   println!("{:?}", option_test(Some(8)));
   mod_test::you_say("he he");
-  mod_test2::just_see()
+  println!("{}", mod_test2::just_see());
+  println!("{}", inner_mod::suibian());
+  vector_test::run();
 }
