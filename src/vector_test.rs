@@ -77,9 +77,28 @@ fn multi_type() {
   println!("单个元素：{:?}", b);
 }
 
+fn string_test() {
+  let a = String::from("hello rust! 中文");
+  // let b = a[0]; // rust并不支持字符串索引！
+  let b = a.chars(); // 按字符返回迭代器
+  for item in b {
+    println!("遍历单个字符：{}", item);
+  }
+  // println!("{:?}", b); // for循环已经把值move掉了，此处没有所有权
+  let c = a.chars();
+  println!("使用单个字符：{}", c.as_str());
+  let d = a.bytes(); // 按utf-8编码返回迭代，实际上每个元素都是u8
+  for item in d {
+    println!("遍历单个字节：{}", item);
+    // let s = String::from_utf8_lossy(&vec![item]);
+    // println!("{}", s);
+  }
+}
+
 pub fn run() {
   create();
   read();
   loop_test();
   multi_type();
+  string_test();
 }
