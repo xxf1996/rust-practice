@@ -1,6 +1,7 @@
 mod mod_test; // 声明模块（相当于引入？好像不加这个就无法直接通过use来使用）
 mod vector_test;
 mod map_test;
+mod error_test;
 pub use crate::mod_test::inner_mod;
 
 mod mod_test2 {
@@ -141,4 +142,5 @@ fn main() {
   println!("{}", inner_mod::suibian());
   vector_test::run();
   map_test::run();
+  error_test::run();
 }
