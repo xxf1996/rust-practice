@@ -3,6 +3,7 @@ mod vector_test;
 mod map_test;
 mod error_test;
 mod trait_test;
+mod life_test;
 pub use crate::mod_test::inner_mod;
 
 mod mod_test2 {
@@ -145,4 +146,5 @@ fn main() {
   map_test::run();
   error_test::run();
   trait_test::run();
+  life_test::run();
 }
